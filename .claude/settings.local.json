@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir C:\\\\laragon\\\\www\\\\sidodadi)",
+      "Bash(npm install *)",
+      "Bash(npm ls *)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(dir /b /s c:\\\\laragon\\\\www\\\\sidodadi)",
+      "Bash(findstr /v /i \"node_modules\\\\.git\")",
+      "Bash(dir /b /s)",
+      "PowerShell(Get-ChildItem -Path 'c:\\\\laragon\\\\www\\\\sidodadi\\\\src\\\\components' -Recurse -File | ForEach-Object { Write-Output \"$\\($_.FullName\\) - $\\($_.Length\\) bytes\" })"
+    ]
+  }
+}

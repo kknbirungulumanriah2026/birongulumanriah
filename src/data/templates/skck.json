@@ -1,0 +1,45 @@
+{
+  "id": "skck",
+  "kodeSurat": "SKCK",
+  "kode": "SK-04",
+  "judul": "SURAT PENGANTAR SKCK",
+  "deskripsi": "Surat pengantar Nagori untuk pembuatan Catatan Kepolisian di Polsek Sidamanik / Polres Simalungun.",
+  "icon": "verified_user",
+  "kop": {
+    "pemerintah": "PEMERINTAH KABUPATEN SIMALUNGUN",
+    "kecamatan": "KECAMATAN SIDAMANIK",
+    "nagori": "NAGORI BIRONG ULU MANRIAH"
+  },
+  "estimasi": "10 Menit",
+  "persyaratan": [
+    "KTP Pemohon",
+    "Kartu Keluarga (KK)",
+    "Pas Foto 4x6 Background Merah"
+  ],
+  "fields": {
+    "warga": [
+      { "name": "namaLengkap", "label": "Nama Lengkap Pemohon", "type": "text", "required": true },
+      { "name": "nik", "label": "Nomor Induk Kependudukan (NIK 16 Digit)", "type": "text", "maxLength": 16, "required": true },
+      { "name": "tempatLahir", "label": "Tempat Lahir", "type": "text", "required": false },
+      { "name": "tanggalLahir", "label": "Tanggal Lahir", "type": "date", "required": false },
+      { "name": "jenisKelamin", "label": "Jenis Kelamin", "type": "select", "options": ["Laki-laki", "Perempuan"], "required": false },
+      { "name": "pekerjaan", "label": "Pekerjaan", "type": "text", "required": false },
+      { "name": "alamat", "label": "Alamat Lengkap KTP / Domisili", "type": "textarea", "required": true }
+    ],
+    "spesifik": [
+      { "name": "keperluanSkck", "label": "Tujuan Pembuatan SKCK", "type": "text", "placeholder": "Contoh: Melamar Pekerjaan / Pendaftaran BUMN", "required": true },
+      { "name": "instansiTujuan", "label": "Tujuan Instansi / Perusahaan", "type": "text", "placeholder": "Contoh: Polsek Sidamanik / Polres Simalungun", "required": true }
+    ],
+    "tambahan": [
+      { "name": "telepon", "label": "Nomor Telepon / WA Aktif", "type": "tel", "placeholder": "081234567890", "required": true },
+      { "name": "keperluan", "label": "Keperluan Pengajuan", "type": "text", "placeholder": "Contoh: Persyaratan Administrasi", "required": true }
+    ]
+  },
+  "pembuka": "Yang bertanda tangan di bawah ini {jabatanPangulu}, Kecamatan Sidamanik, Kabupaten Simalungun, dengan ini menerangkan bahwa:",
+  "kalimatPenghubung": "Bahwa nama tersebut di atas adalah benar warga Nagori Birong Ulu Manriah dan berdasarkan data yang ada pada kami, yang bersangkutan memerlukan Surat Pengantar untuk pembuatan SKCK dengan keterangan sebagai berikut:",
+  "kalimatPenutup": "Demikian Surat Keterangan ini dibuat dengan sebenarnya untuk dipergunakan sebagaimana mestinya dan agar dapat dipergunakan pihak yang berkepentingan.",
+  "pejabat": {
+    "nama": "KAMARUDDIN",
+    "jabatan": "Pangulu Nagori Birong Ulu Manriah"
+  }
+}

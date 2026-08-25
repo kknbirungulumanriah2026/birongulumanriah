@@ -1,0 +1,47 @@
+{
+  "id": "sku",
+  "kodeSurat": "SKU",
+  "kode": "SK-01",
+  "judul": "SURAT KETERANGAN USAHA",
+  "deskripsi": "Dokumen bukti legalitas usaha lokal bagi pelaku UMKM atau pedagang warga Nagori.",
+  "icon": "storefront",
+  "kop": {
+    "pemerintah": "PEMERINTAH KABUPATEN SIMALUNGUN",
+    "kecamatan": "KECAMATAN SIDAMANIK",
+    "nagori": "NAGORI BIRONG ULU MANRIAH"
+  },
+  "estimasi": "15 Menit",
+  "persyaratan": [
+    "KTP Pemohon (Asli & Fotokopi)",
+    "Kartu Keluarga (KK)",
+    "Foto Tempat Usaha"
+  ],
+  "fields": {
+    "warga": [
+      { "name": "namaLengkap", "label": "Nama Lengkap Pemohon", "type": "text", "required": true },
+      { "name": "nik", "label": "Nomor Induk Kependudukan (NIK 16 Digit)", "type": "text", "maxLength": 16, "required": true },
+      { "name": "tempatLahir", "label": "Tempat Lahir", "type": "text", "required": false },
+      { "name": "tanggalLahir", "label": "Tanggal Lahir", "type": "date", "required": false },
+      { "name": "jenisKelamin", "label": "Jenis Kelamin", "type": "select", "options": ["Laki-laki", "Perempuan"], "required": false },
+      { "name": "pekerjaan", "label": "Pekerjaan", "type": "text", "required": false },
+      { "name": "alamat", "label": "Alamat Lengkap KTP / Domisili", "type": "textarea", "required": true }
+    ],
+    "spesifik": [
+      { "name": "namaUsaha", "label": "Nama Usaha / Toko", "type": "text", "placeholder": "Contoh: Kedai Kopi Sidamanik / Toko Sembako", "required": true },
+      { "name": "bidangUsaha", "label": "Bidang Usaha", "type": "select", "options": ["Perdagangan / Kuliner", "Pertanian / Perkebunan", "Kerajinan / Industri Rumah Tangga", "Jasa & Perbaikan", "Lainnya"], "required": true },
+      { "name": "alamatUsaha", "label": "Alamat Lokasi Usaha", "type": "textarea", "placeholder": "RT/RW & Huta tempat usaha berada", "required": true },
+      { "name": "tahunMulai", "label": "Tahun Berdiri Usaha", "type": "number", "placeholder": "2021", "required": true }
+    ],
+    "tambahan": [
+      { "name": "telepon", "label": "Nomor Telepon / WA Aktif", "type": "tel", "placeholder": "081234567890", "required": true },
+      { "name": "keperluan", "label": "Keperluan Pengajuan", "type": "text", "placeholder": "Contoh: Persyaratan Administrasi", "required": true }
+    ]
+  },
+  "pembuka": "Yang bertanda tangan di bawah ini {jabatanPangulu}, Kecamatan Sidamanik, Kabupaten Simalungun, dengan ini menerangkan bahwa:",
+  "kalimatPenghubung": "Bahwa nama tersebut di atas adalah benar warga Nagori Birong Ulu Manriah dan berdasarkan data yang ada pada kami memiliki usaha sebagai berikut:",
+  "kalimatPenutup": "Demikian Surat Keterangan ini dibuat dengan sebenarnya untuk dipergunakan sebagaimana mestinya dan agar dapat dipergunakan pihak yang berkepentingan.",
+  "pejabat": {
+    "nama": "KAMARUDDIN",
+    "jabatan": "Pangulu Nagori Birong Ulu Manriah"
+  }
+}

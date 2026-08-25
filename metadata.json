@@ -1,0 +1,6 @@
+{
+  "name": "Portal Desa Digital",
+  "description": "Portal Resmi Desa Digital Nusantara - Layanan Administrasi Mandiri, Informasi Terkini, dan Transparency Data Desa.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

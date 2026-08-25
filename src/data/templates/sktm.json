@@ -1,0 +1,46 @@
+{
+  "id": "sktm",
+  "kodeSurat": "SKTM",
+  "kode": "SK-03",
+  "judul": "SURAT KETERANGAN TIDAK MAMPU (SKTM)",
+  "deskripsi": "Surat permohonan pengajuan bantuan pendidikan, beasiswa, kesehatan, atau fasilitas sosial.",
+  "icon": "volunteer_activism",
+  "kop": {
+    "pemerintah": "PEMERINTAH KABUPATEN SIMALUNGUN",
+    "kecamatan": "KECAMATAN SIDAMANIK",
+    "nagori": "NAGORI BIRONG ULU MANRIAH"
+  },
+  "estimasi": "15 Menit",
+  "persyaratan": [
+    "KTP Orang Tua / Wali",
+    "Kartu Keluarga (KK)",
+    "Kartu BPJS / KIS (Jika Ada)"
+  ],
+  "fields": {
+    "warga": [
+      { "name": "namaLengkap", "label": "Nama Lengkap Pemohon", "type": "text", "required": true },
+      { "name": "nik", "label": "Nomor Induk Kependudukan (NIK 16 Digit)", "type": "text", "maxLength": 16, "required": true },
+      { "name": "tempatLahir", "label": "Tempat Lahir", "type": "text", "required": false },
+      { "name": "tanggalLahir", "label": "Tanggal Lahir", "type": "date", "required": false },
+      { "name": "jenisKelamin", "label": "Jenis Kelamin", "type": "select", "options": ["Laki-laki", "Perempuan"], "required": false },
+      { "name": "pekerjaan", "label": "Pekerjaan", "type": "text", "required": false },
+      { "name": "alamat", "label": "Alamat Lengkap KTP / Domisili", "type": "textarea", "required": true }
+    ],
+    "spesifik": [
+      { "name": "namaAnak", "label": "Nama Anak / Penerima Manfaat", "type": "text", "placeholder": "Nama lengkap anak", "required": false },
+      { "name": "sekolahInstansi", "label": "Nama Sekolah / Rumah Sakit / Instansi Tujuan", "type": "text", "placeholder": "Contoh: SMA Negeri Sidamanik / RSUD Simalungun", "required": true },
+      { "name": "pekerjaanKepalaKeluarga", "label": "Pekerjaan Kepala Keluarga", "type": "text", "placeholder": "Contoh: Petani / Buruh Kebun", "required": true }
+    ],
+    "tambahan": [
+      { "name": "telepon", "label": "Nomor Telepon / WA Aktif", "type": "tel", "placeholder": "081234567890", "required": true },
+      { "name": "keperluan", "label": "Keperluan Pengajuan", "type": "text", "placeholder": "Contoh: Persyaratan Administrasi", "required": true }
+    ]
+  },
+  "pembuka": "Yang bertanda tangan di bawah ini {jabatanPangulu}, Kecamatan Sidamanik, Kabupaten Simalungun, dengan ini menerangkan bahwa:",
+  "kalimatPenghubung": "Bahwa nama tersebut di atas adalah benar warga Nagori Birong Ulu Manriah dan berdasarkan data yang ada pada kami, yang bersangkutan termasuk dalam kategori keluarga kurang mampu secara ekonomi dengan keterangan sebagai berikut:",
+  "kalimatPenutup": "Demikian Surat Keterangan ini dibuat dengan sebenarnya untuk dipergunakan sebagaimana mestinya dan agar dapat dipergunakan pihak yang berkepentingan.",
+  "pejabat": {
+    "nama": "KAMARUDDIN",
+    "jabatan": "Pangulu Nagori Birong Ulu Manriah"
+  }
+}

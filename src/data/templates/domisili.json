@@ -1,0 +1,46 @@
+{
+  "id": "skdom",
+  "kodeSurat": "DOMISILI",
+  "kode": "SK-02",
+  "judul": "SURAT KETERANGAN DOMISILI",
+  "deskripsi": "Surat resmi menerangkan status tempat tinggal warga atau badan usaha di wilayah Nagori.",
+  "icon": "home_pin",
+  "kop": {
+    "pemerintah": "PEMERINTAH KABUPATEN SIMALUNGUN",
+    "kecamatan": "KECAMATAN SIDAMANIK",
+    "nagori": "NAGORI BIRONG ULU MANRIAH"
+  },
+  "estimasi": "10 Menit",
+  "persyaratan": [
+    "KTP Pemohon",
+    "Kartu Keluarga (KK)",
+    "Surat Pengantar Gamot / RT"
+  ],
+  "fields": {
+    "warga": [
+      { "name": "namaLengkap", "label": "Nama Lengkap Pemohon", "type": "text", "required": true },
+      { "name": "nik", "label": "Nomor Induk Kependudukan (NIK 16 Digit)", "type": "text", "maxLength": 16, "required": true },
+      { "name": "tempatLahir", "label": "Tempat Lahir", "type": "text", "required": false },
+      { "name": "tanggalLahir", "label": "Tanggal Lahir", "type": "date", "required": false },
+      { "name": "jenisKelamin", "label": "Jenis Kelamin", "type": "select", "options": ["Laki-laki", "Perempuan"], "required": false },
+      { "name": "pekerjaan", "label": "Pekerjaan", "type": "text", "required": false },
+      { "name": "alamat", "label": "Alamat Lengkap KTP / Domisili", "type": "textarea", "required": true }
+    ],
+    "spesifik": [
+      { "name": "statusTempatTinggal", "label": "Status Tempat Tinggal", "type": "select", "options": ["Milik Sendiri", "Sewa / Kontrak", "Ikut Orang Tua", "Lainnya"], "required": true },
+      { "name": "lamaTinggal", "label": "Lama Tinggal (Tahun)", "type": "number", "placeholder": "5", "required": true },
+      { "name": "alasanDomisili", "label": "Keperluan Surat", "type": "text", "placeholder": "Contoh: Persyaratan Buka Rekening Bank / Melamar Kerja", "required": true }
+    ],
+    "tambahan": [
+      { "name": "telepon", "label": "Nomor Telepon / WA Aktif", "type": "tel", "placeholder": "081234567890", "required": true },
+      { "name": "keperluan", "label": "Keperluan Pengajuan", "type": "text", "placeholder": "Contoh: Persyaratan Administrasi", "required": true }
+    ]
+  },
+  "pembuka": "Yang bertanda tangan di bawah ini {jabatanPangulu}, Kecamatan Sidamanik, Kabupaten Simalungun, dengan ini menerangkan bahwa:",
+  "kalimatPenghubung": "Bahwa nama tersebut di atas adalah benar warga Nagori Birong Ulu Manriah dan berdomisili di wilayah Nagori Birong Ulu Manriah dengan keterangan sebagai berikut:",
+  "kalimatPenutup": "Demikian Surat Keterangan ini dibuat dengan sebenarnya untuk dipergunakan sebagaimana mestinya dan agar dapat dipergunakan pihak yang berkepentingan.",
+  "pejabat": {
+    "nama": "KAMARUDDIN",
+    "jabatan": "Pangulu Nagori Birong Ulu Manriah"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "id": "sktik",
+  "kodeSurat": "BEDA_NAMA",
+  "kode": "SK-05",
+  "judul": "SURAT KETERANGAN BEDA NAMA / IJAZAH",
+  "deskripsi": "Surat penjelas perbedaan ejaan nama di KTP, KK, Akta Kelahiran, atau Ijazah.",
+  "icon": "badge",
+  "kop": {
+    "pemerintah": "PEMERINTAH KABUPATEN SIMALUNGUN",
+    "kecamatan": "KECAMATAN SIDAMANIK",
+    "nagori": "NAGORI BIRONG ULU MANRIAH"
+  },
+  "estimasi": "15 Menit",
+  "persyaratan": [
+    "KTP",
+    "KK",
+    "Akta / Ijazah yang Berbeda"
+  ],
+  "fields": {
+    "warga": [
+      { "name": "namaLengkap", "label": "Nama Lengkap Pemohon", "type": "text", "required": true },
+      { "name": "nik", "label": "Nomor Induk Kependudukan (NIK 16 Digit)", "type": "text", "maxLength": 16, "required": true },
+      { "name": "tempatLahir", "label": "Tempat Lahir", "type": "text", "required": false },
+      { "name": "tanggalLahir", "label": "Tanggal Lahir", "type": "date", "required": false },
+      { "name": "jenisKelamin", "label": "Jenis Kelamin", "type": "select", "options": ["Laki-laki", "Perempuan"], "required": false },
+      { "name": "pekerjaan", "label": "Pekerjaan", "type": "text", "required": false },
+      { "name": "alamat", "label": "Alamat Lengkap KTP / Domisili", "type": "textarea", "required": true }
+    ],
+    "spesifik": [
+      { "name": "namaDokumenA", "label": "Nama Tertulis di KTP / KK", "type": "text", "placeholder": "Sesuai KTP", "required": true },
+      { "name": "namaDokumenB", "label": "Nama Tertulis di Ijazah / Akta", "type": "text", "placeholder": "Sesuai Ijazah", "required": true },
+      { "name": "nomorDokumenAcuan", "label": "Nomor Dokumen Acuan", "type": "text", "placeholder": "No. Ijazah / Akta Kelahiran", "required": true }
+    ],
+    "tambahan": [
+      { "name": "telepon", "label": "Nomor Telepon / WA Aktif", "type": "tel", "placeholder": "081234567890", "required": true },
+      { "name": "keperluan", "label": "Keperluan Pengajuan", "type": "text", "placeholder": "Contoh: Persyaratan Administrasi", "required": true }
+    ]
+  },
+  "pembuka": "Yang bertanda tangan di bawah ini {jabatanPangulu}, Kecamatan Sidamanik, Kabupaten Simalungun, dengan ini menerangkan bahwa:",
+  "kalimatPenghubung": "Bahwa nama tersebut di atas adalah benar warga Nagori Birong Ulu Manriah dan berdasarkan data yang ada pada kami, terdapat perbedaan penulisan nama pada dokumen kependudukan dengan keterangan sebagai berikut:",
+  "kalimatPenutup": "Demikian Surat Keterangan ini dibuat dengan sebenarnya untuk dipergunakan sebagaimana mestinya dan agar dapat dipergunakan pihak yang berkepentingan.",
+  "pejabat": {
+    "nama": "KAMARUDDIN",
+    "jabatan": "Pangulu Nagori Birong Ulu Manriah"
+  }
+}
