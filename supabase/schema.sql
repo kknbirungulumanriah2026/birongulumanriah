@@ -53,6 +53,9 @@ create table if not exists public.site_settings (
   contact_email        text,
   contact_address      text,
   operating_hours      text,
+  footer_description   text,
+  vision               text,
+  mission              text,
   avg_service_time     text,
   updated_at           timestamptz not null default now()
 );
@@ -63,6 +66,22 @@ create unique index if not exists site_settings_singleton_idx
   where id = 'singleton';
 
 alter table public.site_settings enable row level security;
+
+-- 1.1 admin_credentials ------------------------------------------------------
+-- Server-only password hash. Never expose this table through the Data API.
+create table if not exists public.admin_credentials (
+  id            text primary key default 'singleton',
+  password_hash text not null,
+  password_salt text not null,
+  updated_at    timestamptz not null default now()
+);
+
+create unique index if not exists admin_credentials_singleton_idx
+  on public.admin_credentials ((true));
+
+alter table public.admin_credentials enable row level security;
+revoke all on table public.admin_credentials from anon, authenticated;
+grant all on table public.admin_credentials to service_role;
 
 -- 1.2 news --------------------------------------------------------------------
 -- Landing page berita & agenda. Only one row can have is_main=true (the
@@ -233,7 +252,7 @@ with (security_invoker = false)
 as select id, village_name, logo_url, hero_title, hero_title_highlight,
   hero_subtitle, hero_bg_url, cta_title, cta_subtitle, cta_bg_url,
   contact_phone, contact_email, contact_address, operating_hours,
-  avg_service_time
+  avg_service_time, footer_description, vision, mission
 from public.site_settings;
 grant select on public.site_settings_public to anon, authenticated;
 
@@ -338,7 +357,7 @@ insert into public.site_settings (
   hero_title, hero_title_highlight, hero_subtitle, hero_bg_url,
   cta_title, cta_subtitle, cta_bg_url,
   contact_phone, contact_email, contact_address,
-  operating_hours, avg_service_time
+  operating_hours, footer_description, vision, mission, avg_service_time
 ) values (
   'singleton',
   'Nagori Birong Ulu Manriah',
@@ -350,9 +369,12 @@ insert into public.site_settings (
   'Tak perlu lagi mengantre lama. Akses seluruh layanan Nagori Birong Ulu Manriah secara mandiri, transparan, dan terpercaya kapan pun Anda membutuhkannya.',
   'https://lh3.googleusercontent.com/aida-public/AB6AXuBk67yMeOQp5KN7cPcFd7WDtD3X5wY04bacNlsI5g0HRwDI6RkDqofd88QpcNiXSsjlNrfERi7iiPbSSHhBi0L21AL-usR-iOtJAtshi9-nGEOz2sLgt1O1b4TRenM7M0SQpnP4reLPBS87dqyvct3g8gnEOA2NpntffAg27Opef6Kis_OssnHNtjdc-GuWyzpbeQP_TGsS6EYp1sKPzQBR1h8I4youtAfHcNjVtO33hfMUeUMe2Rsa',
   '0812-3456-7890',
-  'halo@birongulumanriah.desa.id',
-  'Nagori Birong Ulu Manriah, Kec. Sidamanik, Kab. Simalungun, Sumatera Utara 21171',
-  'Senin - Jumat | 08:00 - 15:30 WIB',
+  'birongulumanriah@desa.go.id',
+  'Jl. Raya Nagori No. 12',
+  'Senin - Jumat, 09:00 - 15:00 WIB',
+  'Melayani warga dengan transparansi, kemudahan, dan ketulusan hati demi kemajuan Nagori Birong Ulu Manriah yang mandiri dan sejahtera.',
+  'Mewujudkan Nagori Birong Ulu Manriah yang Mandiri, Sejahtera, Berkarakter Budaya, dan Terdepan dalam Pelayanan Digital Publik.',
+  'Transparansi tata kelola\nPemberdayaan ekonomi masyarakat\nInformasi publik terbuka dan layanan mandiri digital',
   '15'
 )
 on conflict (id) do update set
@@ -369,6 +391,9 @@ on conflict (id) do update set
   contact_email        = excluded.contact_email,
   contact_address      = excluded.contact_address,
   operating_hours      = excluded.operating_hours,
+  footer_description   = excluded.footer_description,
+  vision              = excluded.vision,
+  mission             = excluded.mission,
   avg_service_time     = excluded.avg_service_time;
 
 -- 6.2 news --------------------------------------------------------------------

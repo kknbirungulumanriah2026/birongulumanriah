@@ -13,20 +13,33 @@ import {
   VILLAGE_STATS,
   VILLAGE_OFFICIALS,
 } from '@/src/data/portalData';
+import { SiteSettings, NewsItem, VillageStat, VillageOfficial } from '@/src/types';
 import {
   getSiteSettings,
   getNews,
   getVillageOfficials,
   getVillageStats,
 } from '@/src/lib/repository';
+import { readCache } from '@/src/lib/cache';
 
 export default function HomePage() {
-  const [settings, setSettings] = useState(DEFAULT_SITE_SETTINGS);
-  const [newsList, setNewsList] = useState(NEWS_DATA);
-  const [villageStats, setVillageStats] = useState(VILLAGE_STATS);
-  const [villageOfficials, setVillageOfficials] = useState(VILLAGE_OFFICIALS);
+  // Initial state MUST match server — read localStorage only inside useEffect.
+  const [settings, setSettings] = useState<SiteSettings>(DEFAULT_SITE_SETTINGS);
+  const [newsList, setNewsList] = useState<NewsItem[]>(NEWS_DATA);
+  const [villageStats, setVillageStats] = useState<VillageStat[]>(VILLAGE_STATS);
+  const [villageOfficials, setVillageOfficials] = useState<VillageOfficial[]>(VILLAGE_OFFICIALS);
 
   useEffect(() => {
+    // Restore from cache after mount to avoid hydration mismatch.
+    const cachedSettings = readCache<SiteSettings>('site_settings');
+    const cachedNews = readCache<NewsItem[]>('news');
+    const cachedOfficials = readCache<VillageOfficial[]>('village_officials');
+    const cachedStats = readCache<VillageStat[]>('village_stats');
+    if (cachedSettings) setSettings(cachedSettings);
+    if (cachedNews && cachedNews.length > 0) setNewsList(cachedNews);
+    if (cachedOfficials && cachedOfficials.length > 0) setVillageOfficials(cachedOfficials);
+    if (cachedStats && cachedStats.length > 0) setVillageStats(cachedStats);
+
     const loadData = async () => {
       try {
         const [settingsData, newsData, officialsData, statsData] = await Promise.all([

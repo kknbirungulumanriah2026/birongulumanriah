@@ -1,7 +1,9 @@
 // app/layout.tsx
 
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
+
+const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://nagori-birongulu-manriah.desa.id';
 
 export const metadata: Metadata = {
   title: 'Portal Desa Digital - Nagori Birong Ulu Manriah',
@@ -9,8 +11,8 @@ export const metadata: Metadata = {
     'Nagori Birong Ulu Manriah, Kec. Sidamanik Kab. Simalungun.',
   keywords: ['Nagori Birong Ulu Manriah', 'Portal Desa', 'Simalungun', 'Desa Digital'],
   authors: [{ name: 'Nagori Birong Ulu Manriah' }],
-  viewport: 'width=device-width, initial-scale=1',
   robots: 'index, follow',
+  metadataBase: new URL(appUrl),
   openGraph: {
     title: 'Portal Desa Digital - Nagori Birong Ulu Manriah',
     description:
@@ -19,19 +21,12 @@ export const metadata: Metadata = {
     locale: 'id_ID',
     url: 'https://nagori-birongulu-manriah.desa.id',
     siteName: 'Portal Desa Nagori Birong Ulu Manriah',
-    images: [
-      {
-        url: '/birong.png',
-        width: 512,
-        height: 512,
-        alt: 'Logo Nagori Birong Ulu Manriah',
-      },
-    ],
   },
-  icons: {
-    icon: '/birong.png',
-    apple: '/birong.png',
-  },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({

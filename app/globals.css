@@ -81,17 +81,22 @@
     print-color-adjust: exact !important;
   }
 
-  /* Reset positioning & overflow pada seluruh hierarki modal
-     agar .printable-area tidak ter-clip oleh fixed/overflow ancestor.
-     Specificity .printable-area (0,1,0) > body * (0,0,2) sehingga rule
-     .printable-area di bawah tetap menang. */
   body * {
-    position: static !important;
-    overflow: visible !important;
-    inset: auto !important;
-    max-height: none !important;
-    height: auto !important;
-    visibility: hidden !important;
+    display: none !important;
+  }
+
+  .printable-area,
+  .printable-area * {
+    display: revert !important;
+    visibility: visible !important;
+  }
+
+  .printable-area .flex {
+    display: flex !important;
+  }
+
+  .printable-area .grid {
+    display: grid !important;
   }
 
   .printable-area {
@@ -107,14 +112,8 @@
     box-shadow: none !important;
     background: #ffffff !important;
     color: #000000 !important;
-    visibility: visible !important;
     page-break-after: avoid !important;
     page-break-inside: avoid !important;
-  }
-
-  .printable-area,
-  .printable-area * {
-    visibility: visible !important;
   }
 
   .no-print {

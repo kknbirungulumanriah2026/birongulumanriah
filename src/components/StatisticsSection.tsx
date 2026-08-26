@@ -106,9 +106,7 @@ export const StatisticsSection: React.FC<StatisticsSectionProps> = ({
               Capaian &amp; Statistik Desa
             </h2>
             <p className="mt-3 max-w-lg font-body text-sm leading-relaxed text-gray-500">
-              Ringkasan indikator utama Nagori Birong Ulu Manriah — dapat
-              diakses publik sebagai bentuk transparansi dan akuntabilitas
-              pelayanan.
+              Ringkasan indikator utama yang dikelola melalui panel admin.
             </p>
           </div>
 
@@ -184,8 +182,7 @@ export const StatisticsSection: React.FC<StatisticsSectionProps> = ({
 
         {/* Footnote */}
         <p className="mt-10 text-center font-body text-[11px] text-gray-400">
-          Data diperbarui secara berkala · Sumber: Sekretariat Nagori Birong
-          Ulu Manriah
+          Data diperbarui secara berkala melalui panel admin.
         </p>
       </div>
     </section>

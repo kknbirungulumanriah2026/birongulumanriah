@@ -12,6 +12,7 @@ interface ImageUploadProps {
   label: string;
   value: string;
   onChange: (url: string) => void;
+  onUploadingChange?: (uploading: boolean) => void;
   folder: string;
   maxDim?: number;
   maxSizeMB?: number;
@@ -23,8 +24,7 @@ function bucketObjectPath(url: string): string | null {
   const index = url.indexOf(marker);
   return index === -1 ? null : decodeURIComponent(url.slice(index + marker.length));
 }
-
-export default function ImageUpload({ label, value, onChange, folder, maxDim = 1600, maxSizeMB = 0.2, transparent = false }: ImageUploadProps) {
+export default function ImageUpload({ label, value, onChange, onUploadingChange, folder, maxDim = 1600, maxSizeMB = 0.2, transparent = false }: ImageUploadProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
@@ -38,6 +38,7 @@ export default function ImageUpload({ label, value, onChange, folder, maxDim = 1
       return;
     }
     setBusy(true);
+    onUploadingChange?.(true);
     setError('');
     try {
       const compressed = await imageCompression(file, {
@@ -62,6 +63,7 @@ export default function ImageUpload({ label, value, onChange, folder, maxDim = 1
     } finally {
       setBusy(false);
       if (inputRef.current) inputRef.current.value = '';
+      onUploadingChange?.(false);
     }
   };
 

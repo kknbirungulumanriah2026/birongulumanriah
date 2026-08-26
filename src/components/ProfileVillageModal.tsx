@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { VILLAGE_OFFICIALS, LOGO_URL } from '../data/portalData';
+import { VILLAGE_OFFICIALS } from '../data/portalData';
 import { VillageOfficial, SiteSettings } from '../types';
 
 interface ProfileVillageModalProps {
@@ -20,10 +20,10 @@ export const ProfileVillageModal: React.FC<ProfileVillageModalProps> = ({
 }) => {
   if (!isOpen) return null;
 
-  const villageName = settings?.villageName || 'Nagori Birong Ulu Manriah';
+  const villageName = settings?.villageName || '';
   const activeOfficials = officials.length > 0 ? officials : VILLAGE_OFFICIALS;
-  const address = settings?.contactAddress || 'Nagori Birong Ulu Manriah, Kecamatan Sidamanik, Kabupaten Simalungun, Sumatera Utara';
-  const hours = settings?.operatingHours || 'Senin - Jumat: 08.00 - 15.30 WIB';
+  const address = settings?.contactAddress || '';
+  const hours = settings?.operatingHours || '';
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-fadeInUp">
@@ -58,21 +58,14 @@ export const ProfileVillageModal: React.FC<ProfileVillageModalProps> = ({
               Visi & Misi Nagori Digital 2024–2029
             </h4>
             <p className="font-body text-xs sm:text-sm text-[#1A1A1A] leading-relaxed mb-4 italic font-medium bg-[#F7F7F5] p-3 rounded-lg border border-[#EDEDE9]">
-              "Mewujudkan {villageName} yang Mandiri, Sejahtera, Berkarakter Budaya, dan Terdepan dalam Pelayanan Digital Publik."
+              &quot;{settings?.vision || ''}&quot;
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-gray-600">
-              <div className="p-3 bg-[#F7F7F5] rounded-lg border border-[#EDEDE9]">
-                <strong className="text-[#1A1A1A] block mb-1 font-semibold">1. Transparansi Tata Kelola</strong>
-                Mengedepankan akuntabilitas publik dan transparansi anggaran Nagori.
-              </div>
-              <div className="p-3 bg-[#F7F7F5] rounded-lg border border-[#EDEDE9]">
-                <strong className="text-[#1A1A1A] block mb-1 font-semibold">2. Pemberdayaan Ekonomi</strong>
-                Mengembangkan UMKM lokal, perkebunan teh, dan pertanian masyarakat.
-              </div>
-              <div className="p-3 bg-[#F7F7F5] rounded-lg border border-[#EDEDE9]">
-                <strong className="text-[#1A1A1A] block mb-1 font-semibold">3. Layanan Mandiri 24/7</strong>
-                Permudahan pembuatan surat menyurat melalui layanan digital Nagori.
-              </div>
+              {(settings?.mission || '').split('\n').filter(Boolean).map((item, index) => (
+                <div key={item} className="p-3 bg-[#F7F7F5] rounded-lg border border-[#EDEDE9]">
+                  <strong className="text-[#1A1A1A] block font-semibold">{index + 1}. {item}</strong>
+                </div>
+              ))}
             </div>
           </div>
 

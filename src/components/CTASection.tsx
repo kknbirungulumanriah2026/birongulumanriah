@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { CTA_BG_URL } from '../data/portalData';
 import { SiteSettings } from '../types';
 
 interface CTASectionProps {
@@ -10,11 +9,9 @@ interface CTASectionProps {
 }
 
 export const CTASection: React.FC<CTASectionProps> = ({ settings }) => {
-  const bgUrl = settings?.ctaBgUrl || CTA_BG_URL;
-  const title = settings?.ctaTitle || 'Pantau Perkembangan Nagori Lewat Portal Digital';
-  const subtitle =
-    settings?.ctaSubtitle ||
-    'Dapatkan informasi terkini mengenai berita, agenda, dan program Nagori Birong Ulu Manriah secara terbuka dan terpercaya kapan pun Anda membutuhkannya.';
+  const bgUrl = settings?.ctaBgUrl || '';
+  const title = settings?.ctaTitle || '';
+  const subtitle = settings?.ctaSubtitle || '';
 
   return (
     <section className="w-full px-6 max-w-7xl mx-auto pb-20 sm:pb-28">

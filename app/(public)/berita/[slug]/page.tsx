@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { NEWS_DATA } from '@/src/data/portalData';
 import { NewsItem } from '@/src/types';
 import { getNews } from '@/src/lib/repository';
+import { readCache } from '@/src/lib/cache';
 
 interface BeritaDetailPageProps {
   params: Promise<{ slug: string }>;
@@ -28,7 +29,12 @@ export default function BeritaDetailPage({ params }: BeritaDetailPageProps) {
     const fetchNews = async () => {
       setLoading(true);
       const data = await getNews();
-      const source = data && data.length > 0 ? data : NEWS_DATA;
+      const cached = readCache<NewsItem[]>('news');
+      const source = data && data.length > 0
+        ? data
+        : cached && cached.length > 0
+          ? cached
+          : NEWS_DATA;
       const found = source.find((n) => n.id === slug);
       setNewsItem(found || null);
       setLoading(false);

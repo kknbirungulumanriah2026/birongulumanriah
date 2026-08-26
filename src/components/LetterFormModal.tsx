@@ -4,6 +4,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { LetterTemplate, TemplateField } from '../lib/templates';
+import { usePublicSettings } from '../context/PublicSettingsContext';
 
 interface LetterFormModalProps {
   isOpen: boolean;
@@ -20,6 +21,7 @@ export const LetterFormModal: React.FC<LetterFormModalProps> = ({
 }) => {
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [values, setValues] = useState<FormValues>({});
+  const settings = usePublicSettings();
 
   useEffect(() => {
     setStep(1);
@@ -119,7 +121,7 @@ export const LetterFormModal: React.FC<LetterFormModalProps> = ({
   const now = new Date();
   const bulanRomawi = ROMAN_MONTHS[now.getMonth()];
   const tahunTerbit = now.getFullYear();
-  const nomorSurat = `/PPN/${bulanRomawi}/BUM/${tahunTerbit}`;
+  const nomorSurat = `${'\u00A0'.repeat(3)}/PPN/${bulanRomawi}/BUM/${tahunTerbit}`;
 
   const BULAN_ID = [
     'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
@@ -315,36 +317,48 @@ export const LetterFormModal: React.FC<LetterFormModalProps> = ({
                   lineHeight: '1.5',
                 }}
               >
-                {/* Kop Surat dengan Logo Kabupaten Simalungun */}
-                <div className="letter-kop relative text-center border-b-2 border-black pb-2 mb-3 px-16">
+                {/* Kop Surat */}
+                <div className="letter-kop flex items-center border-b-2 border-black pb-2 mb-3">
                   <img
-                    src="/simalungun.png"
-                    alt="Logo Kabupaten Simalungun"
-                    className="absolute left-0 w-20 h-20 object-contain"
-                    style={{ top: '-10px' }}
+                    src={settings.logoUrl}
+                    alt={`Logo ${settings.villageName}`}
+                    className="w-20 h-20 object-contain flex-shrink-0 mr-4"
                   />
-                  <div className="text-[14pt] font-bold tracking-wide uppercase">
-                    {template.kop.pemerintah}
-                  </div>
-                  <div className="text-[12pt] font-bold uppercase tracking-wider">
-                    {template.kop.kecamatan} {template.kop.nagori}
-                  </div>
-                  <div className="text-[9pt] italic text-gray-700 mt-0.5">
-                    Kecamatan Sidamanik, Kabupaten Simalungun, Sumatera Utara
-                  </div>
-                </div>
-
-                {/* Judul Surat */}
-                <div className="text-center mb-1">
-                  <div className="text-[13pt] font-bold uppercase underline">
-                    {template.judul}
+                  <div className="text-center flex-1">
+                    <div className="text-[14pt] font-bold tracking-wide uppercase">
+                      {template.kop.pemerintah}
+                    </div>
+                    <div className="text-[12pt] font-bold uppercase tracking-wider">
+                      {template.kop.kecamatan} {template.kop.nagori}
+                    </div>
+                    <div className="text-[9pt] italic text-gray-700 mt-0.5">
+                      Kecamatan Sidamanik, Kabupaten Simalungun, Sumatera Utara
+                    </div>
                   </div>
                 </div>
 
-                {/* Tanggal di tengah, di bawah judul (sesuai PDF referensi) */}
-                <div className="text-center mb-3">
-                  <div className="text-[12pt]">
-                    {namaNagori}, {tanggalSurat}
+                <div className="grid grid-cols-[1fr_1.25fr] gap-8 mb-5">
+                  <div className="space-y-0.5 text-[11pt]">
+                    <div className="grid grid-cols-[5.2rem_1fr]">
+                      <span>Nomor</span><span>: {nomorSurat}</span>
+                    </div>
+                    <div className="grid grid-cols-[5.2rem_1fr]">
+                      <span>Sifat</span><span>: Penting</span>
+                    </div>
+                    <div className="grid grid-cols-[5.2rem_1fr]">
+                      <span>Lampiran</span><span>: -</span>
+                    </div>
+                    <div className="grid grid-cols-[5.2rem_1fr] items-start">
+                      <span>Perihal</span>
+                      <span className="font-bold">: {template.judul}</span>
+                    </div>
+                  </div>
+                  <div className="text-[11pt]">
+                    <div className="text-right mb-4">{namaNagori}, {tanggalSurat}</div>
+                    <div>Kepada Yth:</div>
+                    <div className="font-bold">Yang Berkepentingan</div>
+                    <div>di-</div>
+                    <div className="pl-16">Tempat</div>
                   </div>
                 </div>
 
@@ -392,10 +406,7 @@ export const LetterFormModal: React.FC<LetterFormModalProps> = ({
                 {/* Tanda Tangan */}
                 <div className="letter-ttd flex justify-end">
                   <div className="text-center w-64">
-                    <div className="text-[11pt]">
-                      {namaNagori}, {tanggalSurat}
-                    </div>
-                    <div className="text-[11pt] mt-1" style={{ marginBottom: '3.5rem' }}>
+                    <div className="text-[11pt]" style={{ marginBottom: '3.5rem' }}>
                       {template.pejabat.jabatan}
                     </div>
                     <div className="text-[11pt] font-bold underline">

@@ -3,7 +3,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { HERO_BG_URL } from '@/src/data/portalData';
 import { SiteSettings } from '@/src/types';
 
 interface HeroSectionProps {
@@ -11,11 +10,10 @@ interface HeroSectionProps {
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ settings }) => {
-  const bgUrl = settings?.heroBgUrl || HERO_BG_URL;
-  const title = settings?.heroTitle || 'Nagori';
-  const highlight = settings?.heroTitleHighlight || 'Birung Ulu Manriah.';
-  const subtitle = settings?.heroSubtitle || 'Kec. Sidamanik Kab. Simalungun';
-  const avgTime = settings?.avgServiceTime || '10';
+  const bgUrl = settings?.heroBgUrl || '';
+  const title = settings?.heroTitle || '';
+  const highlight = settings?.heroTitleHighlight || '';
+  const subtitle = settings?.heroSubtitle || '';
 
   // Typing effect
   const [displayTitle, setDisplayTitle] = useState('');

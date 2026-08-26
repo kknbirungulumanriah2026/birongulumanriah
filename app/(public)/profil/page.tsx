@@ -17,19 +17,21 @@ import {
   getVillageOfficials,
   getVillageStats,
 } from '@/src/lib/repository';
-
-import { isSupabaseConfigured } from '@/src/lib/supabase';
+import { readCache } from '@/src/lib/cache';
 
 export default function ProfilPage() {
-  const [settings, setSettings] = useState<SiteSettings>(
-    isSupabaseConfigured ? ({} as SiteSettings) : DEFAULT_SITE_SETTINGS
-  );
-  const [officials, setOfficials] = useState<VillageOfficial[]>(
-    isSupabaseConfigured ? [] : VILLAGE_OFFICIALS
-  );
-  const [stats, setStats] = useState<VillageStat[]>(isSupabaseConfigured ? [] : VILLAGE_STATS);
+  const [settings, setSettings] = useState<SiteSettings>(DEFAULT_SITE_SETTINGS);
+  const [officials, setOfficials] = useState<VillageOfficial[]>(VILLAGE_OFFICIALS);
+  const [stats, setStats] = useState<VillageStat[]>(VILLAGE_STATS);
 
   useEffect(() => {
+    const cachedSettings = readCache<SiteSettings>('site_settings');
+    const cachedOfficials = readCache<VillageOfficial[]>('village_officials');
+    const cachedStats = readCache<VillageStat[]>('village_stats');
+    if (cachedSettings) setSettings(cachedSettings);
+    if (cachedOfficials && cachedOfficials.length > 0) setOfficials(cachedOfficials);
+    if (cachedStats && cachedStats.length > 0) setStats(cachedStats);
+
     const loadData = async () => {
       const [settingsData, officialsData, statsData] = await Promise.all([
         getSiteSettings(),
@@ -52,7 +54,7 @@ export default function ProfilPage() {
       <div className="text-center mb-16">
         <div className="flex items-center justify-center gap-3 mb-4">
           <img
-            src={settings.logoUrl || '/birong.png'}
+            src={settings.logoUrl}
             alt="Logo Nagori"
             className="w-10 h-10 object-contain"
           />
@@ -67,26 +69,19 @@ export default function ProfilPage() {
 
       {/* Visi & Misi */}
       <section className="bg-white p-6 sm:p-8 rounded-2xl border border-[#EDEDE9] shadow-xs mb-10">
-        <h2 className="font-headline text-xl font-semibold text-[#1A1A1A] mb-4 flex items-center gap-2">
+          <h2 className="font-headline text-xl font-semibold text-[#1A1A1A] mb-4 flex items-center gap-2">
           <span className="material-symbols-outlined text-base">flag</span>
           Visi & Misi Nagori Digital 2024–2029
         </h2>
         <p className="font-body text-sm text-[#1A1A1A] leading-relaxed mb-6 italic font-medium bg-[#F7F7F5] p-4 rounded-lg border border-[#EDEDE9]">
-          "Mewujudkan {settings.villageName} yang Mandiri, Sejahtera, Berkarakter Budaya, dan Terdepan dalam Pelayanan Digital Publik."
+          &quot;{settings.vision || `Mewujudkan ${settings.villageName} yang Mandiri, Sejahtera, Berkarakter Budaya, dan Terdepan dalam Pelayanan Digital Publik.`}&quot;
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-gray-600">
-          <div className="p-3 bg-[#F7F7F5] rounded-lg border border-[#EDEDE9]">
-            <strong className="text-[#1A1A1A] block mb-1 font-semibold">1. Transparansi Tata Kelola</strong>
-            Mengedepankan akuntabilitas publik dan transparansi anggaran Nagori.
-          </div>
-          <div className="p-3 bg-[#F7F7F5] rounded-lg border border-[#EDEDE9]">
-            <strong className="text-[#1A1A1A] block mb-1 font-semibold">2. Pemberdayaan Ekonomi</strong>
-            Mengembangkan UMKM lokal, perkebunan teh, dan pertanian masyarakat.
-          </div>
-          <div className="p-3 bg-[#F7F7F5] rounded-lg border border-[#EDEDE9]">
-            <strong className="text-[#1A1A1A] block mb-1 font-semibold">3. Informasi Publik Terbuka</strong>
-            Menyajikan berita, agenda, dan data Nagori secara digital untuk seluruh masyarakat.
-          </div>
+          {(settings.mission || 'Transparansi tata kelola\nPemberdayaan ekonomi masyarakat\nInformasi publik terbuka dan layanan mandiri digital').split('\n').filter(Boolean).map((item, index) => (
+            <div key={item} className="p-3 bg-[#F7F7F5] rounded-lg border border-[#EDEDE9]">
+              <strong className="text-[#1A1A1A] block font-semibold">{index + 1}. {item}</strong>
+            </div>
+          ))}
         </div>
       </section>
 

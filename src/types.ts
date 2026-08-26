@@ -16,6 +16,9 @@ export interface SiteSettings {
   contactEmail: string;
   contactAddress: string;
   operatingHours: string;
+  footerDescription: string;
+  vision: string;
+  mission: string;
   created_at?: string;
   updated_at?: string;
 }
